@@ -1,0 +1,15 @@
+<%- include("partials/header"); -%>
+    <h1>News</h1>
+    <p> <%= newsContent %> </p>
+    <div class="news-container">
+        <form action="submit" method="post">
+            <label for="keyword">Keyword</label>
+            <input class="keywordSearch" type="text" name="keywordString" placeholder="ChatGPT">
+            <button class="news-btn" type="submit">Go</button>
+
+            <label for="Source">Source (optional)</label>
+            <input  class="sourceSearch" type="text" name="sourceString" placeholder="BBC News">
+            <button class="news-btn" type="submit">Go</button>
+        </form>
+    </div>
+<%- include("partials/footer"); -%>
