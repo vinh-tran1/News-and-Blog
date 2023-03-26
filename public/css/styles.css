@@ -24,7 +24,7 @@
 }
 
 .footer {
-	position: absolute;
+	position: fixed;
 	text-align: center;
 	bottom: 0;
 	width: 100%;
@@ -93,17 +93,26 @@
 
 .news-container{
   display: flex;
+  font-size: 14pt;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
 }
 
 .keywordSearch{
+  padding: 2px;
+  margin-bottom: 50px;
   margin-left: 10px;
+  margin-right: 40px;
+  width: fit-content;
 }
 
 .sourceSearch{
+  padding: 2px;
+  margin-bottom: 50px;
   margin-left: 10px;
+  margin-right: 40px;
+  width: fit-content;
 }
 
 .news-btn{
@@ -114,7 +123,7 @@
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  margin-right: 20px;
+  margin: 0 auto;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;

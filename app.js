@@ -1,8 +1,12 @@
 //API Key for newsapi.org: d246cd11046d4e41ac56e8ad615f914c
 
+//fix lodash thing
+//make news graphpic better using images
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const https = require("https");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 
@@ -36,6 +40,11 @@ async function main(){
 
   //global var
   //let posts = [];
+  let titles = [];
+  let articleUrls = [];
+  let sources = [];
+  let publishedAt = [];
+  let descriptions = [];
 
   //Routes the HTTP GET Requests to root with the specified callback functions.
   app.get("/", function(req, res){
@@ -57,7 +66,63 @@ async function main(){
   });
 
   app.get("/news", function(req, res){
-    res.render("news", {newsContent: newsContent});
+    //console.log(titles);
+    res.render("news", {
+      newsContent: newsContent,
+      titles: titles,
+      articleUrls: articleUrls,
+      sources: sources,
+      publishedAt: publishedAt,
+      descriptions: descriptions
+    });
+  });
+
+  app.post("/news", function(req, res){
+    const userAgent = req.get('user-agent');
+    const keyw = req.body.keywordString;
+    var source = req.body.sourceString;
+    //console.log(keyw + "  " + source);
+    
+    if (source.length != 0)
+      source = "&source=" + source;
+
+    const apikey = "d246cd11046d4e41ac56e8ad615f914c";
+    const url = "https://newsapi.org/v2/everything?q=" 
+                + keyw + source 
+                + "&sortBy=popularity&apiKey=" + apikey;
+
+    console.log(url);
+
+    const options = {headers: {'User-Agent': userAgent}};
+
+    https.get(url, options, function(response) {
+      console.log(response.statusCode);
+      let data = '';
+      //titles = [];
+
+      response.on("data", function(chunk) {
+        data += chunk;
+      });
+
+      response.on("end", function(){
+        const newsData = JSON.parse(data);
+        //console.log(newsData);
+        for (let i = 0; i < newsData.articles.length / 5; i++){
+          // if (newsData.articles[i] != null){
+            titles[i] = newsData.articles[i].title;
+            articleUrls[i] = newsData.articles[i].url;
+            sources[i] = newsData.articles[i].source.name;
+            publishedAt[i] = newsData.articles[i].publishedAt;
+            descriptions[i] = newsData.articles[i].description;
+            //console.log(articleUrls[i]);
+          //}
+        }
+      });
+    }).on("error", function(error){
+      console.error(error);
+    });
+
+    res.redirect("news");
   });
 
   app.get("/compose", function(req, res){
@@ -105,21 +170,6 @@ async function main(){
       console.log(err);
     });
 
-  });
-
-  app.get("/news", function(req, res){
-
-  });
-
-  app.post("/news", function(req, res){
-    // const keyw = req.body.keywordString;
-    // const source = req.body,sourceString;
-
-    // //if source null then url wihtout source
-    // //source = "&source=..."
-
-    // const apikey = "d246cd11046d4e41ac56e8ad615f914c";
-    // const url = "https://newsapi.org/v2/everything?q=" + keyw + source + "&sortBy=popularity&apiKey=apikey";
   });
 
   app.listen(3000, function() {
