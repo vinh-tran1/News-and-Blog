@@ -1,24 +1,54 @@
 <%- include("partials/header"); -%>
     <h1>News</h1>
     <p> <%= newsContent %> </p>
-    <div class="news-container">
+    <div class="form-group">
         <form action="/news" method="post">
             <label for="keyword">Keyword</label>
-            <input class="keywordSearch" type="text" name="keywordString" placeholder="ChatGPT">
+            <input class="form-control" type="text" name="keywordString" placeholder="ChatGPT">
         
             <label for="Source">Source (optional)</label>
-            <input  class="sourceSearch" type="text" name="sourceString" placeholder="BBC News">
+            <input class="form-control" type="text" name="sourceString" placeholder="BBC News">
 
             <button class="news-btn" type="submit">Go</button>
         </form>
     </div>
 
-    <% titles.forEach(function(title, index) { %>
-        <h3> 
-            <a target="_blank" rel="noopener" href = "<%=articleUrls[index]%>" style="text-decoration:none"><%=title%></a>
-        </h3>
-        <p><%=descriptions[index]%></p>
-        <p>Source: <%=sources[index]%>, Published:  <%=publishedAt[index]%> </p>
-    <% }); %>
+    <section class="recentNews">
+        <div class="container">
+            <h2 class="news-title">
+                Recent News
+            </h2>
+            <div class="row">
+
+                <% titles.forEach(function(title, index) { %>
+                    <!-- <h3> 
+                        <a target="_blank" rel="noopener" href = "<%=articleUrls[index]%>" style="text-decoration:none"><%=title%></a>
+                    </h3>
+                    <p><%=descriptions[index]%></p>
+                    <p>Source: <%=sources[index]%>, Published:  <%=publishedAt[index]%> </p> -->
+                            
+                    <div class="ct-blog col-sm-6 col-md-4">
+                        <div class="inner">
+                            <div class="fauxcrop">
+                                <a target="_blank" rel="noopener" href="<%=articleUrls[index]%>"><img alt="News Image Not Available" src="<%=urlImages[index]%>"></a>
+                            </div>
+                            <div class="ct-blog-content">
+                                <div class="ct-blog-date">
+                                    <span><%=publishedAt[index].substring(0,10)%></span>
+                                    <p><%=descriptions[index].substring(0,100)%> ... </p>
+                                </div>
+                                <h3 class="ct-blog-header">
+                                    <%=title%>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                            
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+
 
 <%- include("partials/footer"); -%>

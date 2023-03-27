@@ -14,6 +14,7 @@ const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui 
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const newsContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -45,6 +46,7 @@ async function main(){
   let sources = [];
   let publishedAt = [];
   let descriptions = [];
+  let urlImages = [];
 
   //Routes the HTTP GET Requests to root with the specified callback functions.
   app.get("/", function(req, res){
@@ -73,18 +75,19 @@ async function main(){
       articleUrls: articleUrls,
       sources: sources,
       publishedAt: publishedAt,
-      descriptions: descriptions
+      descriptions: descriptions,
+      urlImages: urlImages
     });
   });
 
   app.post("/news", function(req, res){
     const userAgent = req.get('user-agent');
-    const keyw = req.body.keywordString;
-    var source = req.body.sourceString;
-    //console.log(keyw + "  " + source);
+    const keyw = _.kebabCase(req.body.keywordString);
+    var source = _.kebabCase(req.body.sourceString);
+    console.log(keyw + "  " + source);
     
     if (source.length != 0)
-      source = "&source=" + source;
+      source = "&sources=" + source;
 
     const apikey = "d246cd11046d4e41ac56e8ad615f914c";
     const url = "https://newsapi.org/v2/everything?q=" 
@@ -107,14 +110,15 @@ async function main(){
       response.on("end", function(){
         const newsData = JSON.parse(data);
         //console.log(newsData);
-        for (let i = 0; i < newsData.articles.length / 5; i++){
+        //newsData.articles.length / 5
+        for (let i = 0; i < 15; i++){
           // if (newsData.articles[i] != null){
             titles[i] = newsData.articles[i].title;
             articleUrls[i] = newsData.articles[i].url;
             sources[i] = newsData.articles[i].source.name;
             publishedAt[i] = newsData.articles[i].publishedAt;
             descriptions[i] = newsData.articles[i].description;
-            //console.log(articleUrls[i]);
+            urlImages[i] = newsData.articles[i].urlToImage;
           //}
         }
       });

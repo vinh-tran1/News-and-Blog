@@ -91,15 +91,15 @@
   display: flex;
 }
 
-.news-container{
+/* .news-container{
   display: flex;
   font-size: 14pt;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-}
+} */
 
-.keywordSearch{
+/* .keywordSearch{
   padding: 2px;
   margin-bottom: 50px;
   margin-left: 10px;
@@ -113,7 +113,7 @@
   margin-left: 10px;
   margin-right: 40px;
   width: fit-content;
-}
+} */
 
 .news-btn{
   background-color: #9ff0e0;
@@ -123,7 +123,7 @@
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  margin: 0 auto;
+  margin: 25px auto;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;
@@ -133,4 +133,78 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+}
+
+.recentNews {
+  /* background-color: #32937f; */
+  background-color: white;
+}
+.recentNews .news-title {
+  text-align:center;
+  padding-top:30px;
+  padding-bottom:30px;
+  font-family: 'nimbus-sans-condensed', sans-serif;
+  font-size:55px;
+  font-weight:bold;
+  /* color: #fff; */
+  color: #32937f;
+}
+.recentNews .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+.recentNews .ct-blog {
+  margin-bottom: 30px;
+}
+
+.description {
+  font-size: 5;
+}
+.ct-blog .inner {
+  background-color: #FFF;
+  padding: 5px;
+  transition: all 0.2s ease-in-out 0s;
+  cursor: pointer;
+  height: 100%;
+}
+.ct-blog .inner:hover {
+  /* background-color: #e6e6e6; */
+  background-color: rgb(219, 244, 235);
+}
+.ct-blog .fauxcrop {
+  height: 180px;
+  overflow: hidden;
+}
+.ct-blog .fauxcrop img {
+  width: 100%;
+}
+.ct-blog-content {
+  display: table;
+  padding: 30px 0 28px;
+}
+.ct-blog-content .ct-blog-date {
+  border-right: 1px solid #95A5A6;
+  display: table-cell;
+  font-family: "Lato", sans-serif;
+  padding: 0px 18px 0px 15px;
+  text-align: left;
+}
+.ct-blog-content .ct-blog-date span {
+  font-size: 16px;
+  color:  #32937f;  
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+.ct-blog-content .ct-blog-header {
+  color: #000;
+  display: table-cell;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.1;
+  padding: 0 20px;
+  vertical-align: top;
 }
