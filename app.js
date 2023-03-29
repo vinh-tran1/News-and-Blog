@@ -1,8 +1,3 @@
-//API Key for newsapi.org: d246cd11046d4e41ac56e8ad615f914c
-
-//fix lodash thing
-//make news graphpic better using images
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -26,7 +21,7 @@ app.use(express.static("public"));
 main().catch(err => console.log(err));
 
 async function main(){
-  const url = 'mongodb://localhost:27017';
+  const url = 'mongodb://0.0.0.0:27017';
   const dbPath = "/blogDB";
   await mongoose.connect(url + dbPath, {useNewUrlParser: true});
 
