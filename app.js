@@ -84,7 +84,7 @@ async function main(){
     if (source.length != 0)
       source = "&sources=" + source;
 
-    const apikey = "d246cd11046d4e41ac56e8ad615f914c";
+    const apikey = "XXXXXXXXXX";
     const url = "https://newsapi.org/v2/everything?q=" 
                 + keyw + source 
                 + "&sortBy=popularity&apiKey=" + apikey;
