@@ -8,7 +8,7 @@ Using a news api, the user can input keywords and/or news source and the page wi
 ## Blog
 The user can also write their thoughts in blog format that will appear on the Home Page. They can then click on the blog and will be redirected to the full blog page. Meant to facillitate quick ideas based off recent news articles. Posts can also be deleted. 
 
-<img width="1514" alt="Screen Shot 2023-03-30 at 10 25 19 AM" src="https://user-images.githubusercontent.com/102923292/228868144-c80aff0e-f2f4-41e7-9fd8-cfadf6c80359.png">
+<img width="1340" alt="Screen Shot 2023-03-31 at 8 19 58 PM" src="https://user-images.githubusercontent.com/102923292/229255993-ecdaac4d-6e32-4a37-8212-a161f5d6d15f.png">
 
 ### General Notes:
 This is a simple web app to help me better understand the front and back end. 
